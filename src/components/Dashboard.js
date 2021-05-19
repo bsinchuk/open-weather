@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 
 import WeatherCard from './WeatherCard';
-import { fetchAllWeather, deleteCity } from '../actions';
+import { fetchAllWeather, deleteCity, updateCityWeather } from '../actions';
 
 const Dashboard = props => {
 
@@ -13,12 +13,11 @@ const Dashboard = props => {
 
   const updateHandler = (id, e) => {
     e.preventDefault();
-    console.log(id, ' is updating');
+    props.update(id);
   }
 
   const removeHadnler = (id, e) => {
     e.preventDefault();
-    console.log('removing ', id);
     props.remove(id);
   }
 
@@ -40,12 +39,12 @@ const Dashboard = props => {
       props.cities.map((city, index) => (
         <Grid key={index} item zeroMinWidth >
           <WeatherCard
-            weatherData={{
-              id: city.id, 
-              country: city.country, 
-              icon: city.icon, 
-              temp: city.temp,
-              city: city.name }}
+            id={city.id}
+            country={city.country}
+            icon={city.icon}
+            temp={city.temp}
+            city={city.name}
+            updating={city.updating}
             onUpdate={updateHandler}
             onDelete={removeHadnler}
             onExpand={expandHandler}
@@ -65,6 +64,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   initiate: () => dispatch(fetchAllWeather()),
   remove: (id) => dispatch(deleteCity(id)),
+  update: (id) => dispatch(updateCityWeather(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

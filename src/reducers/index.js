@@ -1,4 +1,6 @@
-import { ADD_CITY, RECIEVE_CITY_WEATHER, CATCH_ERROR, RECIEVE_ALL_WEATHER, DELETE_CITY } from '../actions';
+import { ADD_CITY, RECIEVE_CITY_WEATHER, CATCH_ERROR, 
+         RECIEVE_ALL_WEATHER, DELETE_CITY, UPDATE_CITY,
+         RECIEVE_CITY_UPDATE } from '../actions';
 
 
 const defaultState = {
@@ -45,6 +47,31 @@ const basicReducer = (state = defaultState, action) => {
         weather: [
           ...state.weather.filter(city => city.id !== action.id)
         ],
+      }
+    case UPDATE_CITY:
+      return {
+        ...state,
+        weather: state.weather.map(city => {
+          if (city.id !== action.id) {
+            return city;
+          } else {
+            return {
+              ...city,
+              updating: true,
+            }
+          }
+        }),
+      }
+    case RECIEVE_CITY_UPDATE:
+      return {
+        ...state,
+        weather: state.weather.map(city => {
+          if (city.id !== action.payload.id) {
+            return city;
+          } else {
+            return action.payload
+          }
+        }),
       }
     default:
       return state;

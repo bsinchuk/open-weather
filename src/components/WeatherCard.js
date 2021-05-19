@@ -4,6 +4,7 @@ import { Card, CardHeader, CardMedia, CardContent,
 import DeleteIcon from '@material-ui/icons/Delete';
 import UpdateIcon from '@material-ui/icons/Update';
 import { makeStyles } from '@material-ui/core/styles';
+import { CircularProgress } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,24 +24,22 @@ const useStyles = makeStyles((theme) => ({
   },
   temp: {
     marginLeft: 10,
+  },
+  spinner: {
+    marginTop: 99,
+    marginBottom: 98,
   }
 }));
 
-const WeatherCard = ({ weatherData, onUpdate, onDelete, onExpand  }) => {
+const WeatherCard = ({ id, city, country, icon, temp,
+                       updating, onUpdate, onDelete, onExpand  }) => {
 
   const classes = useStyles();
-  const imgSrc = `http://openweathermap.org/img/wn/${weatherData.icon}@2x.png`;
-  const tempStr = Math.round(weatherData.temp) + '°';
+  const imgSrc = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+  const tempStr = Math.round(temp) + '°';
 
-  return (
-    <Card 
-      variant="outlined" 
-      className={classes.root}
-      onClick={onExpand.bind(null, weatherData.id)}>
-      <CardHeader
-        className={classes.header} 
-        title={weatherData.city} 
-        subheader={weatherData.country} />
+  let content = (
+    <>
       <CardMedia
         className={classes.img}
         component="img"
@@ -54,15 +53,36 @@ const WeatherCard = ({ weatherData, onUpdate, onDelete, onExpand  }) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="update" onClick={onUpdate.bind(null, weatherData.id)} >
+        <IconButton aria-label="update" onClick={onUpdate.bind(null, id)} >
           <UpdateIcon color="primary" />
         </IconButton>
-        <IconButton aria-label="delete" onClick={onDelete.bind(null, weatherData.id)} >
+        <IconButton aria-label="delete" onClick={onDelete.bind(null, id)} >
           <DeleteIcon color="secondary" />
         </IconButton>
       </CardActions>
+    </>
+  );
+
+  if (updating) {
+    content = (
+      <CircularProgress className={classes.spinner}/>
+    )
+  }
+
+  return (
+    <Card 
+      variant="outlined" 
+      className={classes.root}
+      onClick={onExpand.bind(null, id)}>
+      <CardHeader
+        className={classes.header} 
+        title={city} 
+        subheader={country} />
+      {content}
     </Card>
   );
 }
 
-export default WeatherCard;
+export default React.memo(WeatherCard, (prevProps, nextProps) => {
+  return prevProps.temp === nextProps.temp && prevProps.updating === nextProps.updating;
+});
