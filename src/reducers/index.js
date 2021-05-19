@@ -1,4 +1,4 @@
-import { ADD_CITY, RECIEVE_CITY_WEATHER, CATCH_ERROR, RECIEVE_ALL_WEATHER } from '../actions';
+import { ADD_CITY, RECIEVE_CITY_WEATHER, CATCH_ERROR, RECIEVE_ALL_WEATHER, DELETE_CITY } from '../actions';
 
 
 const defaultState = {
@@ -38,6 +38,13 @@ const basicReducer = (state = defaultState, action) => {
         weather: [
           ...action.payload,
         ]
+      }
+    case DELETE_CITY:
+      return {
+        ...state,
+        weather: [
+          ...state.weather.filter(city => city.id !== action.id)
+        ],
       }
     default:
       return state;

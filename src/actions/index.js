@@ -2,6 +2,7 @@ export const ADD_CITY = 'ADD_CITY';
 export const RECIEVE_CITY_WEATHER = 'RECIEVE_CITY_WEATHER';
 export const CATCH_ERROR = 'CATCH_ERROR';
 export const RECIEVE_ALL_WEATHER = 'RECIEVE_ALL_WEATHER';
+export const DELETE_CITY = 'DELETE_CITY';
 
 const key = process.env.REACT_APP_WEATHER_API_KEY;
 
@@ -81,3 +82,17 @@ export const fetchAllWeather =  () => async (dispatch) => {
     }    
   }
 };
+
+export const deleteCity = (id) => {
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (+localStorage.getItem(key) === id) {
+      localStorage.removeItem(key);
+      break;
+    }
+  }
+  return {
+    type: DELETE_CITY,
+    id: id
+  };
+}
