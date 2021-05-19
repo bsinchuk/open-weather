@@ -24,8 +24,8 @@ const basicReducer = (state = defaultState, action) => {
         adding: false,
         error: false,
         weather: [
-          ...state.weather,
           action.payload,
+          ...state.weather,
         ],
       }
     case CATCH_ERROR:
