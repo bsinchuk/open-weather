@@ -1,4 +1,4 @@
-import { ADD_CITY, RECIEVE_CITY_WEATHER, CATCH_ERROR } from '../actions';
+import { ADD_CITY, RECIEVE_CITY_WEATHER, CATCH_ERROR, RECIEVE_ALL_WEATHER } from '../actions';
 
 
 const defaultState = {
@@ -31,6 +31,13 @@ const basicReducer = (state = defaultState, action) => {
         ...state,
         error: action.info,
         adding: false,
+      }
+    case RECIEVE_ALL_WEATHER:
+      return {
+        ...state,
+        weather: [
+          ...action.payload,
+        ]
       }
     default:
       return state;

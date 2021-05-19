@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
+
 import WeatherCard from './WeatherCard';
+import { fetchAllWeather } from '../actions';
 
 const Dashboard = props => {
+
+  useEffect(() => {
+    props.initiate();
+  }, []);
+
   const updateHandler = (id, e) => {
     e.preventDefault();
     console.log(id, ' is updating');
@@ -55,7 +62,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  dispatch: null,
+  initiate: () => dispatch(fetchAllWeather()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
