@@ -1,6 +1,9 @@
 import React, { useRef } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+
+import { fetchCityWeather } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
   adder: {
@@ -20,7 +23,7 @@ const Adder = props => {
 
   const submitHandler = e => {
     e.preventDefault();
-    console.log(cityRef.current.value, 'submitted');
+    props.fetchWeather(cityRef.current.value);
   };
 
   return (
@@ -34,12 +37,15 @@ const Adder = props => {
         variant="filled"
         fullWidth
         inputRef={cityRef}
+        error={props.error.length > 0}
+        helperText={props.error.length > 0 ? props.error: ''}
       />
       <Button 
         size="large"
         variant="contained" 
         color="primary"
         type="submit"
+        disabled={props.isAdding}
       >
         Add
       </Button>
@@ -48,4 +54,13 @@ const Adder = props => {
 
 };
 
-export default Adder;
+const mapStateToProps = state => ({
+  error: state.error,
+  isAdding: state.adding,
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchWeather: city => dispatch(fetchCityWeather(city)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Adder);
