@@ -2,14 +2,16 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { CircularProgress } from '@material-ui/core';
 
+import ForecastWidget from './ForecastWidget';
+
 const useStyles = makeStyles((theme) => ({
   wrapper: {
-    width: 260,
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: 'white',
     padding: 15,
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif;'
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif;',
+    "@media (max-width:450px)": { width: 250, },
   },
   header: {
     display: 'flex',
@@ -38,9 +40,12 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     marginTop: 10,
     paddingTop: 10,
+    paddingBottom: 10,
+    marginBottom: 10,
     fontSize: '1rem',
     color: 'grey',
     borderTop: '1px solid grey',
+    borderBottom: '1px solid grey',
   },
   column: {
     display: 'flex',
@@ -124,6 +129,7 @@ const WeatherModal = (props) => {
             </span>
           </div>
         </div>
+        <ForecastWidget forecast={props.hourly} hours={hours}/>
       </div>
     );
   } else {

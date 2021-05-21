@@ -13,6 +13,11 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    "@media (max-width:450px)": {
+      overflow: 'scroll',
+      alignItems: 'flex-start',
+      marginTop: 20,
+    }
   },
 }));
 
