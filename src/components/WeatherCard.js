@@ -35,7 +35,7 @@ const WeatherCard = ({ id, city, country, icon, temp, coords,
                        updating, onUpdate, onDelete, onExpand  }) => {
 
   const classes = useStyles();
-  const imgSrc = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+  const imgSrc = process.env.PUBLIC_URL + `/img/${icon}.png`;
   const tempStr = Math.round(temp) + '°';
 
   let content = (

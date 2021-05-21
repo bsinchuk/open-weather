@@ -64,7 +64,8 @@ const useStyles = makeStyles((theme) => ({
 
 const WeatherModal = (props) => {
   const classes = useStyles();
-  const imgSrc = `https://openweathermap.org/img/wn/${props.icon}@2x.png`;
+  
+  const imgSrc = process.env.PUBLIC_URL + `/img/${props.icon}.png`;
   const tempStr = Math.round(props.temp) + '°';
   const feelsStr = Math.round(props.feels) + '°';
   const date = new Date((props.time + props.offset) * 1000);
