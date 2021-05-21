@@ -77,13 +77,13 @@ const WeatherModal = (props) => {
 
   let content = '';
   if (props.fetching) {
-    content = <CircularProgress color='secondary'/>;
+    content = <CircularProgress color='secondary' data-testid="modal-spinner"/>;
   } else if (props.city) {
     content = (
       <div className={classes.wrapper}>
         <div className={classes.header}>
           <div>
-            <p className={classes.city}>
+            <p className={classes.city} data-testid="modal-city">
               {props.city}
             </p>
             <p className={classes.country}>
@@ -92,7 +92,6 @@ const WeatherModal = (props) => {
             <p className={classes.temp}>
               {tempStr}
             </p>
-            {/* <p>{`${date.getHours()}:${date.getMinutes()}`}</p> */}
           </div>
           <img src={imgSrc} alt={props.description} className={classes.img}/>
         </div>
@@ -134,7 +133,7 @@ const WeatherModal = (props) => {
       </div>
     );
   } else {
-    content = <p></p>;
+    content = <p data-testid="modal-empty"></p>;
   }
   return content;
 };

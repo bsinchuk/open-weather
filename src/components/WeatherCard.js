@@ -48,7 +48,8 @@ const WeatherCard = ({ id, city, country, icon, temp, coords,
         <Typography className={classes.temp}
           align="center"
           color="textPrimary"
-          variant="h4">
+          variant="h4"
+          data-testid="card-temp">
           {tempStr}
         </Typography>
       </CardContent>
@@ -65,7 +66,7 @@ const WeatherCard = ({ id, city, country, icon, temp, coords,
 
   if (updating) {
     content = (
-      <CircularProgress className={classes.spinner}/>
+      <CircularProgress className={classes.spinner} data-testid="card-spinner"/>
     )
   }
 

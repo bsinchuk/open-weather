@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Adder = props => {
+export const Adder = props => {
   const cityRef = useRef();
   const classes = useStyles();
 
@@ -46,6 +46,7 @@ const Adder = props => {
         color="primary"
         type="submit"
         disabled={props.isAdding}
+        data-testid="add-button"
       >
         Add
       </Button>
