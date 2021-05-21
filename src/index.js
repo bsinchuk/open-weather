@@ -10,10 +10,15 @@ import basicReducer from './reducers';
 const composeEnhancers = process.env.NODE_ENV === 'development' 
   ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
+
+const middleware = process.env.NODE_ENV !== 'production' ?
+  [require('redux-immutable-state-invariant').default(), thunk] :
+  [thunk];
+
 const store = createStore(
   basicReducer, 
   composeEnhancers(
-    applyMiddleware(thunk)
+    applyMiddleware(...middleware)
 ));
 
 const app = (
