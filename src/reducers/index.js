@@ -1,6 +1,9 @@
 import { ADD_CITY, RECIEVE_CITY_WEATHER, CATCH_ERROR, 
          RECIEVE_ALL_WEATHER, DELETE_CITY, UPDATE_CITY,
-         RECIEVE_CITY_UPDATE } from '../actions';
+         RECIEVE_CITY_UPDATE, 
+         FETCH_FORECAST,
+         RECIEVE_FORECAST,
+         CLOSE_FORECAST} from '../actions';
 
 
 const defaultState = {
@@ -70,6 +73,51 @@ const basicReducer = (state = defaultState, action) => {
             return city;
           } else {
             return action.payload
+          }
+        }),
+      }
+    case FETCH_FORECAST:
+      return {
+        ...state,
+        weather: state.weather.map(city => {
+          if (city.id !== action.id) {
+            return city;
+          } else {
+            return {
+              ...city,
+              expand: true,
+              fetching: true,
+            }
+          }
+        }),
+      }
+    case RECIEVE_FORECAST:
+      return {
+        ...state,
+        weather: state.weather.map(city => {
+          if (city.id !== action.id) {
+            return city;
+          } else {
+            return {
+              ...city,
+              expand: true,
+              fetching: false,
+              ...action.payload,
+            }
+          }
+        }),
+      }
+    case CLOSE_FORECAST:
+      return {
+        ...state,
+        weather: state.weather.map(city => {
+          if (city.id !== action.id) {
+            return city;
+          } else {
+            return {
+              ...city,
+              expand: false,
+            }
           }
         }),
       }

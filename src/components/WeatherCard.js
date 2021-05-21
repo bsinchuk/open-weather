@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const WeatherCard = ({ id, city, country, icon, temp,
+const WeatherCard = ({ id, city, country, icon, temp, coords,
                        updating, onUpdate, onDelete, onExpand  }) => {
 
   const classes = useStyles();
@@ -73,7 +73,7 @@ const WeatherCard = ({ id, city, country, icon, temp,
     <Card 
       variant="outlined" 
       className={classes.root}
-      onClick={onExpand.bind(null, id)}>
+      onClick={onExpand.bind(null, id, coords)}>
       <CardHeader
         className={classes.header} 
         title={city} 
