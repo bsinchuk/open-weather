@@ -4,7 +4,7 @@ The weather app built using openweather API.
 
 ## Github Pages
 
-Deployed at bsinchuk.github.io/open-weather/.
+Deployed at [bsinchuk.github.io/open-weather/]
 
 ## Notes
 
