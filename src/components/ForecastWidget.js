@@ -83,7 +83,7 @@ const ForecastWidget = ({ forecast, hours }) => {
                 {time}
               </p>
               <div className={classes.temp} style={{
-                'margin-top': `${margin}px`,
+                'marginTop': `${margin}px`,
                 'backgroundColor': `rgba(${r},${g},${b}, 0.6)`
                 }}
               >

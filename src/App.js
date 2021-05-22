@@ -1,8 +1,9 @@
 import React from 'react';
 import { Grid, CssBaseline } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
 import Adder from './components/Adder';
 import Dashboard from './components/Dashboard';
-import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   'spacing-xs-3': {

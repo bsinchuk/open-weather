@@ -10,7 +10,6 @@ const defaultState = {
   loading: false,
   error: '',
   adding: false,
-  cityList: [],
   weather: [],
 }
 
