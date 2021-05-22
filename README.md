@@ -4,11 +4,11 @@ The weather app built using openweather API.
 
 ## Github Pages
 
-Deployed at [bsinchuk.github.io/open-weather/]
+Deployed at [https://bsinchuk.github.io/open-weather/](https://bsinchuk.github.io/open-weather/).
 
 ## Notes
 
-Preffered modal with weather data to custom pages using react-router.
+Decided to use modal window with detailed weather data instead of react-router pages.
 
 ## Available Scripts
 
