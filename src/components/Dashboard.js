@@ -62,6 +62,7 @@ const Dashboard = props => {
         direction="row"
         alignItems="center"
         justify="center"
+        data-testid="dashboard-container"
       >
       {
         props.cities.map((city, index) => (
